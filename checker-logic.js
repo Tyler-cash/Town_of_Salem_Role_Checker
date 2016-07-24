@@ -3,15 +3,16 @@ var RULESET = 0;
 //0 = ranked
 var available_roles = [];
 var GROUPS = [];
+var claimed_roles = [];
 
 function createPlayer(player_number, roles) {
     var html =
-        "<li class=\"collection-item\">" +
+        "<li id=\"" + player_number + "\" class=\"collection-item\">" +
         "<p class=\"player-num\">" + player_number + "</p>" +
         "<select id=\"selector" + player_number + "\" class=\"role-selector right\">" +
         "<option value=\"0\" disabled selected>Please select role</option>";
     for (var i = 0; i < roles.length; i++) {
-        html += "<option value=\"" + i + "\">" + roles[i] + "</option>";
+        html += "<option value=\"" + roles[i] + "\">" + roles[i] + "</option>";
     }
 
     return html + "<label></label></select></li>";
@@ -21,7 +22,7 @@ function getPossibleRoles() {
     return available_roles;
 
 }
-function initialSetup(column) {
+function initialSetup() {
     setupGameMode(RULESET);
     possible_roles = getPossibleRoles();
 
@@ -60,12 +61,37 @@ function initialSetup(column) {
     function roleValues(name, number, roles) {
         return {
             "name": name,
-            "quantity": number,
+            "quantity_limit": number,
+            "quantity": 0,
             "roles": roles
         };
     }
 }
 
 $(document).ready(function () {
-    initialSetup($("#alive-players"));
+    initialSetup();
+});
+
+function checkRoleValidity() {
+    for (var key in claimed_roles) {
+        for (var i = 0; i < GROUPS.length; i++) {
+            for (var k = 0; k < GROUPS[i].roles.length; k++) {
+                if (claimed_roles[key] === GROUPS[i].roles[k]) {
+                    GROUPS[i].quantity++;
+                    if (GROUPS[i].quantity >= GROUPS[i].quantity_limit) {
+                        alert("Warning, " + GROUPS[i].name + " limit reached");
+                    }
+                }
+            }
+        }
+    }
+}
+$(function () {
+    $(".role-selector").change(function () {
+        var player_num = $(this).parent().parent().children(".player-num").text();
+        if (player_num !== "") {
+            claimed_roles[player_num] = $(this).val();
+            checkRoleValidity();
+        }
+    });
 });
