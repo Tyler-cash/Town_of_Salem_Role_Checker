@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Town of Salem role checker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link type="text/css" rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.css"/>
+    <link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
+</head>
+<body>
+<div class="row">
+    <article>
+        <div class="offset-s2 col s4">
+            <p class="center">Alive players</p>
+            <ul class="collection" id="alive-players">
+
+            </ul>
+        </div>
+        <div class="offset-s1 col s4">
+            <p class="center">Dead players</p>
+            <ul class="#ffcdd2 red lighten-4 collection" id="dead-players">
+                <li><p class="center">No dead players yet</p></li>
+            </ul>
+        </div>
+    </article>
+</div>
+
+<script type="text/javascript" rel="script" src="checker-logic.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.center {
+    text-align: center;
+}
+
+.player-num {
+    margin-top: 10px;
+    float: left;
+}
+
+.collection-item {
+    height: 70px;
+}
