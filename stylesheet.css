@@ -7,6 +7,18 @@
     float: left;
 }
 
+.role-selector {
+    position: relative;
+    top: -5px;
+}
+
+.player-group {
+    margin-left: 200px;
+}
+
+#player-group-title {
+    margin-left: 95px;
+}
 .collection-item {
     height: 70px;
 }
