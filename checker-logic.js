@@ -189,6 +189,8 @@ function checkRoleValidity() {
     }
 }
 $(function () {
+    //color codes all selected players and adds their alignment to be visible
+    //by the user.
     $(".role-selector").change(function () {
         var player_num = $(this).parent().parent().children(".player-num").text();
         if (player_num !== "") {
@@ -196,4 +198,21 @@ $(function () {
             checkRoleValidity();
         }
     });
+
+    //removes all players and reinitializes the web app
+    $("#reset-button").click(function () {
+        //Removes all players. PLAYER_LIMIT will always be 1 too low in the
+        //context of a for loop so requires +1.
+        for (var i = 1; i < PLAYER_LIMIT + 1; i++) {
+            removePlayer(i);
+        }
+        initialSetup();
+    });
+
+    //Removes player at position if it exists.
+    function removePlayer(position) {
+        if ($("#" + position + "").length) {
+            $("#" + position + "").remove();
+        }
+    }
 });
