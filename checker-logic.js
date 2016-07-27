@@ -20,14 +20,8 @@ function createPlayer(player_number, roles) {
 
     return html + "<label></label></select></li>";
 }
-//TODO make read list and find roles that don't add up
-function getPossibleRoles() {
-    return available_roles;
-
-}
 function initialSetup() {
     setupGameMode(RULESET);
-    possible_roles = getPossibleRoles();
 
     for (var i = 1; i < PLAYER_LIMIT + 1; i++) {
         var element = createPlayer(i, available_roles);
@@ -192,6 +186,8 @@ $(function () {
     //color codes all selected players and adds their alignment to be visible
     //by the user.
     $(".role-selector").change(function () {
+        //Gets player number relevant to role that was changed and adds it to
+        //the global role tracker.
         var player_num = $(this).parent().parent().children(".player-num").text();
         if (player_num !== "") {
             claimed_roles[player_num] = $(this).val();
