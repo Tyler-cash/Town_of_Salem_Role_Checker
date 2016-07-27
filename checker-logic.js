@@ -23,12 +23,21 @@ function createPlayer(player_number, roles) {
 function initialSetup() {
     setupGameMode(RULESET);
 
+    //Generates list of blank players to the players column.
     for (var i = 1; i < PLAYER_LIMIT + 1; i++) {
         var element = createPlayer(i, available_roles);
-        $("#alive-players").append(element);
+        //Pushes to other column once a 3/4 of the way through
+        if (i < PLAYER_LIMIT - (PLAYER_LIMIT / 4 + 1)) {
+            $("#players1").append(element);
+        } else {
+            $("#players2").append(element);
+        }
         $("#selector" + i).material_select();
     }
 
+    //This method currently is rather meaningless. Although if other game modes were to
+    //be added in the future all that would need to change is for the ruleset to be added
+    //to this switch statement and the corresponding value being passed into the function.
     function setupGameMode(RULESET) {
         switch (RULESET) {
             //Ranked ruleset
